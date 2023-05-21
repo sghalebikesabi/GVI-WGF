@@ -1,0 +1,44 @@
+defaults:
+  - task_regression
+  - training: base
+  - model: mlp
+
+#TODO:  1-hidden layer NN with ReLU nonlinearity [45], containing 50 hidden units for smaller datasets and 100 hidden units for the larger protein and Year Prediction MSD datasets.
+
+#TODO: 40 epochs, batch size 100
+
+#TODO: 5 networks
+
+training:
+  optimizer: sgd
+  update_rule:
+    args:
+      lr: 1e-1
+  max_epoch: 40
+
+data:
+  group: uci
+  train_args:
+    name: concrete
+    split: train
+  eval_args:
+    name:
+    split: valid
+  loader_args:
+    train:
+      drop_last: False
+      batch_size: 100 #16384
+    eval:
+      drop_last: False
+      batch_size: 16384
+
+model:
+  n_models: 5
+  model_args:
+    hidden_nodes: [50]
+
+logging:
+  interval: 100
+  rolling_predictions_plot: False
+  final_predictions_plot: False
+  final_predictions_save: False

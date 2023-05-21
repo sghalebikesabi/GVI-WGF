@@ -1,0 +1,10 @@
+training:
+  loss_fn: mse
+
+eval:
+  metrics: ["gaussian_nll", "predictive_variance", "mse_of_mean"]
+  early_stopping_metric: mse_of_mean
+
+model:
+  model_args:
+    n_output: 1

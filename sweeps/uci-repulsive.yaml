@@ -1,0 +1,47 @@
+program: src/main.py
+method: grid
+metric:
+  goal: minimize
+  name: eval_rmse_of_mean
+project: langevin
+name: uci-bocoen-repulsive-sgd-loong
+
+parameters:
+  training.max_epoch:
+    values: [10000]
+  data.train_args.split:
+    values: [train]
+  data.eval_args.split:
+    values: [valid]
+  data.loader_args.train.batch_size:
+    values: [100]
+  training.update_rule.args.lr:
+    values: [1e-2, 2e-2, 3e-2]
+  training.update_rule.args.langevin_reg_param:
+    values: [0, 1e-4, 5e-4]
+  training.update_rule.args.kernel_reg_param:
+    values: [1e-3, 1e-4]
+  training.update_rule.args.kernel_args.sigma:
+    values: [median]
+  training.update_rule.distance_on:
+    values: [params]
+  data.train_args.name:
+    values: [boston, concrete]
+  training.optimizer:
+    values: [sgd]
+  # "KIN8NM",
+  # "power",
+  # "protein",
+  # "wine",
+  # "yacht",
+  # "naval",
+  model.model_args.init.method:
+    values: [kaiming]
+
+command:
+  - ${env}
+  - CUBLAS_WORKSPACE_CONFIG=:4096:8
+  - python
+  - ${program}
+  - training/update_rule=repulsive
+  - ${args_no_hyphens}

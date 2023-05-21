@@ -1,0 +1,20 @@
+args:
+  method: repulsive
+  # lr: 1e-3
+  langevin_reg_param: 1e-4 # (only used for langevin deep ensembles, lambda/lambda_2)
+  kernel_reg_param: 1e-3 # (only used for repulsive langevin deep ensembles, lambda_1)
+  kernel_args:
+    sigma: rolling_median # 1
+  noise_param: 1
+  likl_param: 1
+  kernel_param: 1
+  prior_kernel_param: 1
+
+data:
+  kernel_distr: valid
+  n_kernel_samples: 1
+
+prior_model:
+  n_models: 200
+
+distance_on: params

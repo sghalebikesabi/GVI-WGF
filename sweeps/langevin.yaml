@@ -1,0 +1,22 @@
+program: src/main.py
+method: grid
+metric:
+  goal: minimize
+  name: eval_rmse_of_mean
+project: langevin
+name: toy-langevin
+
+parameters:
+  training.update_rule.args.lr:
+    values: [8e-4, 1e-3, 2e-3]
+  training.update_rule.args.langevin_reg_param:
+    values: [1e-3, 1e-2, 1e-1]
+  training.update_rule.args.method:
+    values: ["langevin"]
+
+command:
+  - ${env}
+  - CUBLAS_WORKSPACE_CONFIG=:4096:8
+  - python
+  - ${program}
+  - ${args_no_hyphens}

@@ -1,0 +1,10 @@
+defaults:
+  - _base
+
+training:
+  max_iter: 5
+
+logging:
+  interval: 1
+  rolling_predictions_plot: 1
+  # rolling_params_plot: 1

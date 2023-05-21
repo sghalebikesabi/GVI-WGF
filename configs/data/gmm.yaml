@@ -1,0 +1,10 @@
+defaults:
+  - base
+
+group: simulated
+train_args:
+  name: gmm
+  mean_mult: 1
+eval_args:
+  name: gmm
+  mean_mult: 1

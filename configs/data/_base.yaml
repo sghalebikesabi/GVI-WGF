@@ -1,0 +1,16 @@
+args:
+  error_split: random
+loader_args:
+  train:
+    drop_last: False
+    batch_size: 1024
+  eval:
+    drop_last: False
+    batch_size: 12000
+group: uci
+train_args:
+  name: concrete
+  split: train
+eval_args:
+  name:
+  split: valid

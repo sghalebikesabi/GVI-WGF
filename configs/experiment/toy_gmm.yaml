@@ -1,0 +1,77 @@
+# @package _global_
+data:
+  group: simulated
+  train_args:
+    name: toy_repulsive_paper
+    drop_ranges: []
+    n_samples: 5
+    std: 0.25
+    low: 0
+    high: 7
+  eval_args:
+    name: toy_repulsive_paper
+    n_samples: 5
+    std: 0
+    low: 0
+    high: 7
+  loader_args:
+    train:
+      drop_last: False
+      batch_size: 1
+    eval:
+      drop_last: False
+      batch_size: 12000
+
+# run_bbp: True
+
+training:
+  max_iter: 10_000
+  max_epoch:
+  early_stopping_args:
+    disable: True
+  loss_fn: gmm
+  update_rule:
+    args:
+      method: repulsive
+      lr: 1e-2
+      langevin_reg_param: 0.2 # (only used for langevin deep ensembles, lambda/lambda_2)
+      kernel_reg_param: 0.6 # (only used for repulsive langevin deep ensembles, lambda_1)
+      kernel_args:
+        sigma: median
+      noise_param: 1
+      likl_param: 0
+      kernel_param: 1
+      prior_kernel_param: 1
+    data:
+      kernel_distr: valid
+      n_kernel_samples: 100
+    prior_model:
+      n_models: 200
+    distance_on: params
+
+eval:
+  metrics: []
+  early_stopping_metric: None
+
+model:
+  n_models: 300
+  model_type: mlp
+  model_args:
+    hidden_nodes: [1]
+    bias: False
+    init:
+      method: normal
+      weight_init_var: 1
+      bias_init_var: 1
+
+logging:
+  interval: 1_000_000
+  rolling_predictions_plot: False
+  rolling_params_plot: 50
+  final_predictions_plot: False
+  final_predictions_save: False
+  final_params_plot: True
+  plot_format: jpg
+
+run_name:
+  prefix: "gmm_"

@@ -1,0 +1,6 @@
+defaults:
+  - uci
+
+model:
+  model_args:
+    hidden_nodes: [100]

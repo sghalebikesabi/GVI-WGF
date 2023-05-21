@@ -1,0 +1,70 @@
+# @package _global_
+
+data:
+  group: simulated
+  train_args:
+    name: toy_repulsive_paper
+    drop_ranges: []
+    n_samples: 5
+    std: 0.25
+    low: 0
+    high: 7
+  eval_args:
+    name: toy_repulsive_paper
+    n_samples: 5
+    std: 0
+    low: 0
+    high: 7
+  loader_args:
+    train:
+      drop_last: False
+      batch_size: 1
+    eval:
+      drop_last: False
+      batch_size: 12000
+
+training:
+  max_iter: 100_000
+  max_epoch:
+  optimizer: sgd
+  update_rule:
+    args:
+      lr: 1e-4
+      langevin_reg_param: 1
+      kernel_reg_param: 1
+      kernel_args:
+        sigma: 1
+      noise_param: 1
+      likl_param: 1
+      kernel_param: 1
+      prior_kernel_param: 1
+  early_stopping_args:
+    disable: True
+  loss_fn: toy1
+
+eval:
+  metrics: []
+  early_stopping_metric: None
+
+model:
+  n_models: 300
+  model_type: mlp
+  model_args:
+    hidden_nodes: []
+    bias: False
+    init:
+      method: normal
+      weight_init_var: 1
+      bias_init_var: 1
+
+logging:
+  interval: 100
+  rolling_predictions_plot: False
+  rolling_params_plot: 50
+  final_predictions_plot: False
+  final_predictions_save: False
+  final_params_plot: True
+  plot_format: jpg
+
+run_name:
+  prefix: "optq_"

@@ -1,0 +1,10 @@
+training:
+  loss_fn: accuracy
+
+eval:
+  metrics: ["accuracy", "brier", "categorical_nll"]
+  early_stopping_metric: categorical_nll
+
+model:
+  model_args:
+    n_output: 2

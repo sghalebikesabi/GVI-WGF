@@ -1,0 +1,10 @@
+n_models: 100
+model_type: mlp
+model_args:
+  init:
+    method: kaiming
+    weight_init_var: 1
+    bias_init_var: 1
+  hidden_nodes: [10, 10]
+load_from_path: False
+reset_first_layer: False

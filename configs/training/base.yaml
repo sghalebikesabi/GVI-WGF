@@ -1,0 +1,9 @@
+max_iter: 10000
+loss_fn: mse
+early_stopping_args:
+  disable: False
+  patience: 200
+  miniter: 500
+  verbose: False
+ema:
+  param: .99

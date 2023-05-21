@@ -1,0 +1,41 @@
+program: src/main.py
+method: grid
+metric:
+  goal: minimize
+  name: eval_rmse_of_mean
+project: langevin
+name: uci-bocoen-langevin-sgd-looong
+
+parameters:
+  training.max_epoch:
+    values: [10000]
+  data.train_args.split:
+    values: [train]
+  data.eval_args.split:
+    values: [valid]
+  data.loader_args.train.batch_size:
+    values: [100]
+  training.update_rule.args.lr:
+    values: [5e-4, 1e-3, 5e-3]
+  training.update_rule.args.langevin_reg_param:
+    values: [1e-4, 1e-3]
+  data.train_args.name:
+    values: [boston, concrete, energy]
+  training.optimizer:
+    values: [sgd]
+  # "KIN8NM",
+  # "power",
+  # "protein",
+  # "wine",
+  # "yacht",
+  # "naval",
+  model.model_args.init.method:
+    values: [kaiming]
+
+command:
+  - ${env}
+  - CUBLAS_WORKSPACE_CONFIG=:4096:8
+  - python
+  - ${program}
+  - training/update_rule=langevin
+  - ${args_no_hyphens}

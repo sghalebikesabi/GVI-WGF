@@ -1,0 +1,6 @@
+framework: sklearn
+
+model:
+  model_args:
+    # sklearn_args:
+    #   nesterovs_momentum: False

@@ -1,0 +1,3 @@
+#TODO: MNIST, we used an MLP with 3-hidden layers with 200 hidden units per layer and ReLU non-linearities with batch normalization
+
+# TODO: we also evaluate it on a test set containing unknown classes. We used the test split of the NotMNIST10 dataset.

@@ -1,0 +1,37 @@
+program: src/main.py
+method: grid
+metric:
+  goal: minimize
+  name: eval_rmse_of_mean
+project: langevin
+name: uci-bocoen-bbp
+
+parameters:
+  bbp.num_epochs:
+    values: [10000]
+  bbp.num_units:
+    values: [10]
+  data.train_args.split:
+    values: [train]
+  data.eval_args.split:
+    values: [valid]
+  bbp.lr:
+    values: [1e-3, 1e-2, 1e-1]
+  data.train_args.name:
+    values: [boston, concrete, energy]
+  # "KIN8NM",
+  # "power",
+  # "protein",
+  # "wine",
+  # "yacht",
+  # "naval",
+  model.model_args.init.method:
+    values: [kaiming]
+
+command:
+  - ${env}
+  - CUBLAS_WORKSPACE_CONFIG=:4096:8
+  - python
+  - ${program}
+  - run_bbp=True
+  - ${args_no_hyphens}

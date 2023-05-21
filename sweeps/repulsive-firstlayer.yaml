@@ -1,0 +1,25 @@
+program: src/main.py
+method: grid
+metric:
+  goal: minimize
+  name: eval_rmse_of_mean
+project: langevin
+name: toy-repulsive-1stlayer
+
+parameters:
+  training.update_rule.args.lr:
+    values: [6e-4, 8e-4, 1e-3]
+  training.update_rule.args.langevin_reg_param:
+    values: [0, 1e-2]
+  training.update_rule.args.kernel_reg_param:
+    values: [1e-3, 1e-2, 1e-1, 1]
+  training.update_rule.args.kernel_args.sigma:
+    values: ["half_median", "rolling_median", "twice_median"] # , "median"
+
+command:
+  - ${env}
+  - CUBLAS_WORKSPACE_CONFIG=:4096:8
+  - python
+  - ${program}
+  - +experiment=vincent_repuls_1layer
+  - ${args_no_hyphens}

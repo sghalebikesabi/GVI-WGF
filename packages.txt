@@ -1,0 +1,14 @@
+hydra-core
+torch
+torchvision
+tqdm
+scikit-learn
+matplotlib
+wandb
+pandas
+seaborn
+dm-haiku
+ml_collections
+xlrd
+openpyxl
+jax[cpu]

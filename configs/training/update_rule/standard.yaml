@@ -1,0 +1,11 @@
+args:
+  method: standard
+  # lr: 1e-3
+  langevin_reg_param: None
+  kernel_reg_param: None
+  kernel_args:
+    sigma: None
+  noise_param: None
+  likl_param: None
+  kernel_param: None
+  prior_kernel_param: None

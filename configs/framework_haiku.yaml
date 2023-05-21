@@ -1,0 +1,4 @@
+framework: haiku
+
+training:
+  optimizer: None

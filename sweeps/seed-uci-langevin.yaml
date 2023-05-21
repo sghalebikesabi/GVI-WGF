@@ -1,0 +1,44 @@
+program: src/main.py
+method: grid
+metric:
+  goal: minimize
+  name: eval_rmse_of_mean
+project: standard-short-final-uci
+name: uci-langevin-sgd
+
+parameters:
+  training.max_epoch:
+    values: [40, 160]
+  data.train_args.split:
+    values: [train_valid]
+  data.eval_args.split:
+    values: [test]
+  data.loader_args.train.batch_size:
+    values: [100]
+  training.update_rule.args.lr:
+    values: [5e-4, 5e-3]
+  training.update_rule.args.langevin_reg_param:
+    values: [1e-6, 1e-5]
+  # data.train_args.name:
+  #   values: [boston, concrete, energy, KIN8NM, naval, power, wine, yacht]
+  # seed:
+  #   values:
+  #     [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+  data.train_args.name:
+    values: [protein]
+  model.model_args.hidden_nodes:
+    values: [50]
+  seed:
+    values: [0, 1, 2, 3, 4]
+  training.optimizer:
+    values: [sgd]
+  model.model_args.init.method:
+    values: [kaiming]
+
+command:
+  - ${env}
+  - CUBLAS_WORKSPACE_CONFIG=:4096:8
+  - python
+  - ${program}
+  - training/update_rule=langevin
+  - ${args_no_hyphens}

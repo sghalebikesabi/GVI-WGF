@@ -1,0 +1,59 @@
+### Vincents Toy
+# defaults:
+#   - framework_torch
+#   - training/update_rule: repulsive
+#   - _base
+#   - toy_repulsive_paper
+
+# training:
+#   max_iter: 65_000 # 35000
+#   update_rule:
+#     args:
+#       kernel_reg_param: 1e-2
+#       langevin_reg_param: 1e-2
+#       #        method: repulsive
+#       kernel_args:
+#         sigma: rolling_median
+#     distance_on: params
+
+# ---------------------------
+### GMM Toy
+# defaults:
+#   - framework_torch
+#   - _base
+#   - training/update_rule: repulsive
+#   - toy_gmm
+
+# ---------------------------
+### Veits Toy
+defaults:
+  - framework_torch
+  - _base
+  - training/update_rule: repulsive
+
+# run_name:
+#   prefix: "lowersigma"
+
+# logging:
+#   gif_args:
+#     duration: 5
+
+# ---------------------------
+### UCI
+# defaults:
+#   - _base
+#   - framework_torch
+#   - training/update_rule: repulsive
+#   - uci
+# - _test
+
+# data:
+#   train_args:
+#     name: concrete
+#     split: train_valid
+#   eval_args:
+#     split: test
+
+training:
+  early_stopping_args:
+    disable: True

@@ -1,0 +1,16 @@
+# @package _global_
+### Vincents Toy
+defaults:
+  - ../framework_torch
+  - ../_base
+  - ../toy_repulsive_paper
+  - override /training/update_rule: repulsive
+
+model:
+  load_from_path: results/params/2023-03-16/vincent_mnormal_tstandard_t0.001_t0.01_t0.01_trolling_median_tfirst_layer_params_tsgd_ftorch/final_params.npz
+  reset_first_layer: True
+
+training:
+  max_iter: 100_000
+  update_rule:
+    distace_on: first_layer_params

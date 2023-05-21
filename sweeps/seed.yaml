@@ -1,0 +1,24 @@
+program: src/main.py
+method: grid
+metric:
+  goal: minimize
+  name: eval_rmse_of_mean
+
+parameters:
+  seed:
+    values: [0, 1, 2, 3, 4]
+  training.update_rule.args.method:
+    values: ["repulsive"]
+  training.update_rule.data.kernel_drop_range_descr:
+    values: ["inverted"]
+  training.update_rule.args.langevin_reg_param:
+    values: [1e-4]
+  training.update_rule.args.kernel_reg_param:
+    values: [1e-3]
+
+command:
+  - ${env}
+  - CUBLAS_WORKSPACE_CONFIG=:4096:8
+  - python
+  - ${program}
+  - ${args_no_hyphens}

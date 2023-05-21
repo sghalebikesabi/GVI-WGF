@@ -1,0 +1,46 @@
+defaults:
+  - task_regression
+  - training: base
+  - model: mlp
+
+data:
+  group: simulated
+  train_args:
+    name: toy_repulsive_paper
+    drop_ranges: [[-1, 1.5], [2.5, 4.5], [6, 8]]
+    n_samples: 90
+    std: 0.25
+    low: 0
+    high: 7
+  eval_args:
+    name: toy_repulsive_paper
+    n_samples: 200
+    std: 0
+    low: 0
+    high: 7
+  loader_args:
+    train:
+      drop_last: False
+      batch_size: 1000
+    eval:
+      drop_last: False
+      batch_size: 12000
+
+training:
+  max_iter: 25000 # 35000
+  update_rule:
+    args:
+      lr: 1e-3
+
+model:
+  n_models: 100
+  model_type: mlp
+  model_args:
+    hidden_nodes: [10, 10]
+    init:
+      method: normal
+      weight_init_var: 1
+      bias_init_var: 1
+
+run_name:
+  prefix: "vincent_"

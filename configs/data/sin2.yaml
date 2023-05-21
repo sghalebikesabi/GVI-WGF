@@ -1,0 +1,13 @@
+defaults:
+  - base
+
+group: simulated
+train_args:
+  name: sin2
+  drop_ranges: [[-12, -10], [-9, -8], [-7, -4], [-2, 0], [8, 9], [10, 12]]
+  low: -12
+  high: 12
+eval_args:
+  name: sin2
+  low: -12
+  high: 12

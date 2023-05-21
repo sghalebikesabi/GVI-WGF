@@ -1,0 +1,53 @@
+defaults:
+  - data: _base
+  - training: base
+
+run_bbp: False
+
+bbp:
+  lr: 1e-2
+  num_epochs: 100
+  num_units: 100
+  log_every: 10
+
+run_name:
+  prefix: ""
+  model_keys_name: [
+      # "model.model_type",
+      "model.model_args.init.method",
+      "training.update_rule.args.method",
+      "training.update_rule.args.lr",
+      "training.update_rule.args.langevin_reg_param",
+      "training.update_rule.args.kernel_reg_param",
+      "training.update_rule.args.kernel_args.sigma",
+      "training.update_rule.distance_on",
+      "training.optimizer",
+      "framework",
+    ]
+
+make_deterministic: True
+
+logging:
+  interval: 20
+  rolling_predictions_plot: 50
+  checkpoint: 5000
+  rolling_params_plot: False
+  final_predictions_plot: False
+  final_params_plot: False
+  final_predictions_save: False
+  plot_args:
+    format: jpg
+  gif_args:
+    duration: 5
+
+seed: 42
+
+wandb_args:
+  mode: online
+  project: langevin
+  entity: XXXX
+
+hydra:
+  run:
+    dir: .
+  output_subdir: null

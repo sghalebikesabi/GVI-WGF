@@ -1,0 +1,14 @@
+defaults:
+  - base
+
+group: simulated
+train_args:
+  name: sin3
+  drop_ranges:
+    [[-1.2, -1.0], [-.9, -.8], [-.7, -.4], [-.2, 0], [.8, .9], [1.0, 1.2]]
+  low: -1.2
+  high: 1.2
+eval_args:
+  name: sin3
+  low: -1.2
+  high: 1.2

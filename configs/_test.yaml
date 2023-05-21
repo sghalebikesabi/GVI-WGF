@@ -1,0 +1,8 @@
+defaults:
+  - _base
+
+logging:
+  interval: 1
+  rolling_predictions_plot: 1000
+  final_predictions_plot: True
+  final_predictions_save: False

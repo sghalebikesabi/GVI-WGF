@@ -1,0 +1,32 @@
+program: src/main.py
+method: grid
+metric:
+  goal: minimize
+  name: eval_rmse_of_mean
+project: langevin
+name: toy-repulsive-nokl
+
+parameters:
+  training.update_rule.args.lr:
+    values: [1e-3]
+  training.update_rule.args.langevin_reg_param:
+    values: [0]
+  training.update_rule.args.kernel_reg_param:
+    values: [1e-3, 1e-2, 1e-1]
+  training.update_rule.args.kernel_args.sigma:
+    values: ["half_median", "rolling_median", "twice_median"] # , "median"
+  training.update_rule.distance_on:
+    values: ["params"] # params, preds
+  training.update_rule.args.method:
+    values: ["repulsive"]
+  training.update_rule.data.kernel_distr:
+    values: ["valid"]
+  training.max_iter:
+    values: [35_000]
+
+command:
+  - ${env}
+  - CUBLAS_WORKSPACE_CONFIG=:4096:8
+  - python
+  - ${program}
+  - ${args_no_hyphens}

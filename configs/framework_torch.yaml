@@ -1,0 +1,4 @@
+framework: torch
+
+training:
+  optimizer: sgd

@@ -1,0 +1,32 @@
+program: src/main.py
+method: grid
+metric:
+  goal: minimize
+  name: eval_rmse_of_mean
+project: langevin
+name: standard
+
+parameters:
+  training.update_rule.args.method:
+    values: [standard]
+  training.max_epoch:
+    values: [40, 80, 160]
+  data.train_args.split:
+    values: [train]
+  data.eval_args.split:
+    values: [valid]
+  data.loader_args.train.batch_size:
+    values: [100, 16384]
+  training.update_rule.args.lr:
+    values: [1e-4, 1e-3, 1e-2, 1e-1]
+  data.train_args.name:
+    values: [boston, concrete, energy]
+  training.optimizer:
+    values: [sgd]
+
+command:
+  - ${env}
+  - CUBLAS_WORKSPACE_CONFIG=:4096:8
+  - python
+  - ${program}
+  - ${args_no_hyphens}
