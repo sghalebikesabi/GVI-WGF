@@ -25,7 +25,7 @@
 #   - toy_gmm
 
 # ---------------------------
-### Veits Toy
+### XXXX Toy
 defaults:
   - framework_torch
   - _base
